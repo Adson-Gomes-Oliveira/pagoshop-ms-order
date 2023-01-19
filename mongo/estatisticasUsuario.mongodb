@@ -2,11 +2,11 @@ use("ecomm-account");
 const user = db.users.find({ nome: { $regex: /marina/i } }).toArray()[0];
 
 use("ecomm-order")
-const totalPedidos = db.orders.find({ "cliente.cliente_id": user._id }).count();
+let totalPedidos = db.orders.find({ "cliente.cliente_id": user._id }).count();
 
 use("ecomm-order")
 db.orders.aggregate([
-  { $match: { "cliente.cliente_id": user._id } }
+  { $match: { "cliente.cliente_id": user._id } },
   { $unwind: "$itens" },
   { $group: {
       _id: 0,
