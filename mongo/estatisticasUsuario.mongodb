@@ -1,0 +1,19 @@
+use("ecomm-account");
+const user = db.users.find({ nome: { $regex: /marina/i } }).toArray()[0];
+
+use("ecomm-order")
+const totalPedidos = db.orders.find({ "cliente.cliente_id": user._id }).count();
+
+use("ecomm-order")
+db.orders.aggregate([
+  { $unwind: "$itens" },
+  { $group: {
+      _id: 0,
+      totalPrice: { $sum: "$itens.PREÇO_UNITÁRIO" },
+      totalDesconto: { $sum: "$itens.DESCONTO" },
+      totalQuantidade: { $sum: "$itens.QUANTIDADE" },
+  } },
+  {
+    $set: { totalPedidos: totalPedidos }
+  }
+]);
