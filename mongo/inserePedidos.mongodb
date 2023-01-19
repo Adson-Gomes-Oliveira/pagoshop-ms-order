@@ -1,0 +1,55 @@
+use("ecomm-order");
+db.orders.insertMany([
+  {
+    pedidoEm: ISODate(),
+    cliente: {
+      cliente_id: ObjectId("63c936dce729baac2b0796cb"),
+      nome: "Marina Albuquerque Mattos",
+    },
+    endereco: {
+      rua: "Nova Sião",
+      numero: "1036",
+      complemento: "Ap. 122, Bloco C",
+      cep: 65012698,
+      cidade: "Belo Horizonte",
+      estado: "Minas Gerais",
+    },
+    itens: [
+      {
+        "PRODUTO": "Notebook Samsung",
+        "QUANTIDADE": 1,
+        "DESCONTO": NumberDecimal("65.88"),
+        "PREÇO_UNITÁRIO": NumberDecimal("3523.00"),
+      },
+    ] 
+  },
+  {
+    pedidoEm: ISODate(),
+    cliente: {
+      cliente_id: ObjectId("63c936dce729baac2b0796ca"),
+      nome: "Angelo da Silva Lemos",
+    },
+    endereco: {
+      rua: "Laranjeiras II",
+      numero: "155",
+      complemento: "Casa",
+      cep: 16589777,
+      cidade: "São Paulo",
+      estado: "São Paulo",
+    },
+    itens: [
+      {
+        "PRODUTO": "Mesa de jantar 6 lugares",
+        "QUANTIDADE": 1,
+        "DESCONTO": NumberDecimal("166.00"),
+        "PREÇO_UNITÁRIO": NumberDecimal("3678.98"),
+      },
+      {
+        "PRODUTO": "iPhone 13 Pro",
+        "QUANTIDADE": 1,
+        "DESCONTO": NumberDecimal("2155.00"),
+        "PREÇO_UNITÁRIO": NumberDecimal("9176.00"),
+      },
+    ] 
+  },
+]);
