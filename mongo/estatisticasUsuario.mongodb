@@ -6,6 +6,7 @@ const totalPedidos = db.orders.find({ "cliente.cliente_id": user._id }).count();
 
 use("ecomm-order")
 db.orders.aggregate([
+  { $match: { "cliente.cliente_id": user._id } }
   { $unwind: "$itens" },
   { $group: {
       _id: 0,
