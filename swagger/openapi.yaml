@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Ecommerce Users - OpenAPI 3.0
+  description: API do Ecommerce desenvolvido durante o curso da Alura.
+  contact:
+    email: adsongoliveira2022@outlook.com
+    name: Desenvolvedor
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.1
+servers:
+  - url: http://localhost:3001
+tags:
+  - name: orders
+    description: Operações relacionadas aos pedidos do Ecommerce
+paths:
+  /api/orders:
+    post:
+      tags:
+        - orders
+      summary: Realiza um novo pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPost'
+      responses:
+        '200':
+          description: Successfully Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        '401':
+          $ref: "#/components/responses/Unauthorized"
+  /api/orders/{id}:
+    get:
+      tags:
+        - orders
+      summary: Retorna um pedido pelo ID
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        client_id:
+          type: string
+        street_address:
+          type: string
+        number_address:
+          type: integer
+        more_info_address:
+          type: string
+        cep:
+          type: integer
+        city:
+          type: string
+        state:
+          type: string
+        product_list:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+              slug:
+                type: string
+              unit_price:
+                type: number
+              stock_quantity:
+                type: integer
+              category_id:
+                type: string
+        created_at:
+          type: string
+          format: date-time
+    OrderPost:
+      type: object
+      properties:
+        client_id:
+          type: string
+        street_address:
+          type: string
+        number_address:
+          type: integer
+        more_info_address:
+          type: string
+        cep:
+          type: integer
+        city:
+          type: string
+        state:
+          type: string
+        product_list:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+              slug:
+                type: string
+              unit_price:
+                type: number
+              stock_quantity:
+                type: integer
+              category_id:
+                type: string
+  responses:
+    BadRequest:
+      description: "Bad format of requisition"
+    Unauthorized:
+      description: "Invalid User or invalid Token"
+    NotFound:
+      description: "Entity not found"
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      description: ID da categoria
+      required: true
+      schema:
+        type: integer
