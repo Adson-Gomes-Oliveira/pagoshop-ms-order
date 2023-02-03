@@ -1,54 +1,54 @@
 use("ecomm-order");
 db.orders.insertMany([
   {
-    pedidoEm: ISODate(),
-    cliente: {
-      cliente_id: ObjectId("63c93f4ba397e898aa760d85"),
-      nome: "Marina Albuquerque Mattos",
+    ordered_at: ISODate(),
+    client: {
+      client_id: ObjectId("63c93f4ba397e898aa760d85"),
+      name: "Marina Albuquerque Mattos",
     },
-    endereco: {
-      rua: "Nova Sião",
-      numero: "1036",
-      complemento: "Ap. 122, Bloco C",
+    address: {
+      street: "Nova Sião",
+      number: "1036",
+      more_info: "Ap. 122, Bloco C",
       cep: 65012698,
-      cidade: "Belo Horizonte",
-      estado: "Minas Gerais",
+      city: "Belo Horizonte",
+      state: "Minas Gerais",
     },
-    itens: [
+    items: [
       {
-        "PRODUTO": "Notebook Samsung",
-        "QUANTIDADE": 1,
-        "DESCONTO": NumberDecimal("65.88"),
-        "PREÇO_UNITÁRIO": NumberDecimal("3523.00"),
+        "product": "Notebook Samsung",
+        "quantity": 1,
+        "discount": NumberDecimal("65.88"),
+        "unit_price": NumberDecimal("3523.00"),
       },
     ] 
   },
   {
-    pedidoEm: ISODate(),
-    cliente: {
-      cliente_id: ObjectId("63c93f4ba397e898aa760d84"),
-      nome: "Angelo da Silva Lemos",
+    ordered_at: ISODate(),
+    client: {
+      client_id: ObjectId("63c93f4ba397e898aa760d84"),
+      name: "Angelo da Silva Lemos",
     },
-    endereco: {
-      rua: "Laranjeiras II",
-      numero: "155",
-      complemento: "Casa",
+    address: {
+      street: "Laranjeiras II",
+      number: "155",
+      more_info: "Casa",
       cep: 16589777,
-      cidade: "São Paulo",
-      estado: "São Paulo",
+      city: "São Paulo",
+      state: "São Paulo",
     },
-    itens: [
+    items: [
       {
-        "PRODUTO": "Mesa de jantar 6 lugares",
-        "QUANTIDADE": 1,
-        "DESCONTO": NumberDecimal("166.00"),
-        "PREÇO_UNITÁRIO": NumberDecimal("3678.98"),
+        "product": "Mesa de jantar 6 lugares",
+        "quantity": 1,
+        "discount": NumberDecimal("166.00"),
+        "unit_price": NumberDecimal("3678.98"),
       },
       {
-        "PRODUTO": "iPhone 13 Pro",
-        "QUANTIDADE": 1,
+        "product": "iPhone 13 Pro",
+        "quantity": 1,
         "DESCONTO": NumberDecimal("2155.00"),
-        "PREÇO_UNITÁRIO": NumberDecimal("9176.00"),
+        "unit_price": NumberDecimal("9176.00"),
       },
     ] 
   },
