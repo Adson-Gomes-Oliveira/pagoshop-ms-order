@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
-app.get('/health-test', (_req, res) => res.status(200).send('Connection OK'));
+app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
 app.use(errorMiddleware);
 
 app.use('/api-docs', swaggerUI.serve);
