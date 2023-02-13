@@ -2,6 +2,7 @@ require('express-async-errors');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const orderRoutes = require('./routes/orders.route');
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require('../swagger/orders-swagger.json');
 const errorMiddleware = require('./middlewares/error.middleware');
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
+app.use('/api/orders', orderRoutes);
 app.use(errorMiddleware);
 
 app.use('/api-docs', swaggerUI.serve);
