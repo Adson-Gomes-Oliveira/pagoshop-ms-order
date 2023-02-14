@@ -36,7 +36,6 @@ const confirmOrder = async (req, res) => {
     .then((result) => result.data);
   
   const productListFormated = await Promise.all(order.productList.map(formatProductList));
-  console.log(productListFormated);
 
   const invoice = await axios.post(`http://finance-container:3004/api/payments/confirm/${payment.id}`, {
     name: client.name,
