@@ -12,30 +12,41 @@ const create = async (req, res) => {
   return res.status(HTTPStatus.CREATED).json(response);
 }
 
-const formatProductList = async (product) => {
-  const productDB = await axios.get(`localhost:3001/api/products/${product.id}`);
+const formatProductList = async (productOrder) => {
+  const productDB = await axios.get(`http://product-container:3001/api/products/${productOrder.productId}`)
+    .then((result) => result.data);
+
   return {
-    productName: productDB.product,
-    quantity: product.quantity,
-    price: product.actualUnitPrice - product.discount
+    product: productDB.product,
+    quantity: productOrder.quantity,
+    price: productOrder.actualUnitPrice - productOrder.discount
   }
-} 
+} // O(n²) -> O(n) => Utilizar api unica com lista de ids como payload que retorna lista pronta de produtos.
 
 const confirmOrder = async (req, res) => {
   const { id } = req.params;
   const payload = req.body;
-  const payment = await axios.post(`localhost:3004/api/payments/`, payload);
-  const order = await axios.get(`localhost:3003/api/orders/${id}`);
-  const client = await axios.get(`localhost:3002/api/accounts/${order.client_id}`);
 
-  const productListFormated = order.productList.map(formatProductList);
+  const payment = await axios.post(`http://finance-container:3004/api/payments/`, payload)
+    .then((result) => result.data);
 
-  const invoice = await axios.post(`localhost:3004/api/payments/confirm/${payment.id}`, {
+  const order = await Orders.findByPk(id);
+
+  const client = await axios.get(`http://account-container:3002/api/accounts/${order.clientId}`)
+    .then((result) => result.data);
+  
+  const productListFormated = await Promise.all(order.productList.map(formatProductList));
+  console.log(productListFormated);
+
+  const invoice = await axios.post(`http://finance-container:3004/api/payments/confirm/${payment.id}`, {
     name: client.name,
     cpf: client.cpf,
-    address: client.address,
-    ordersList: productListFormated,
-  });
+    paymentId: payment.id,
+    description: {
+      buyerAddress: client.address,
+      ordersList: productListFormated
+    }
+  }).then((result) => result.data);
 
   await Orders.update({ status: 'PAYED' }, { where: { id } });
 

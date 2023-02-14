@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       clientId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         field: 'client_id'
       },
       street: {

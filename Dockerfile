@@ -1,4 +1,4 @@
-FROM node:16.4-alpine
+FROM node:18-alpine
 WORKDIR /app/order
 COPY package*.json ./
 COPY .npmrc ./
