@@ -1,8 +1,7 @@
 const HTTPStatus = require('../helpers/HTTP.status');
 
 const errorMiddleware = (err, _req, res, _next) => {
-  console.log(err);
-  if (err.status >= HTTPStatus.INTERNAL) return res.status(err.status).send(err.message);
+  if (!err.status) return res.status(HTTPStatus.INTERNAL).send(err.message);
   return res.status(err.status).send(err.message);
 }
 
