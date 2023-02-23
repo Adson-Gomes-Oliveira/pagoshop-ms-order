@@ -6,7 +6,7 @@ const Orders = (sequelize, DataTypes) => {
     street: DataTypes.STRING,
     number: DataTypes.STRING,
     moreInfo: DataTypes.STRING,
-    cep: DataTypes.BIGINT,
+    cep: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     productList: DataTypes.JSON
