@@ -21,7 +21,6 @@ const payload = (payloadOrder) => {
   console.log(error);
 
   if (error) throw customError(error.message, HTTPStatus.UN_ENTITY);
-  return null;
 }
 
 module.exports = {
