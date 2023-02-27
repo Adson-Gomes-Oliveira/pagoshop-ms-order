@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "jest",
+    "test-file": "jest $(find __tests__ -name \"$1\")"
   },
   "keywords": [],
   "author": "",
