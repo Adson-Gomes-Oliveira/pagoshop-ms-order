@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,51 +7,51 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       clientId: {
         type: Sequelize.STRING,
-        field: 'client_id'
+        field: 'client_id',
       },
       street: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       number: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       moreInfo: {
         type: Sequelize.STRING,
-        field: 'more_info'
+        field: 'more_info',
       },
       cep: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
       },
       city: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       state: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       productList: {
         type: Sequelize.JSON,
-        field: 'product_list'
+        field: 'product_list',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
         field: 'created_at',
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
         field: 'updated_at',
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
-      }
+        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('orders');
-  }
+  },
 };

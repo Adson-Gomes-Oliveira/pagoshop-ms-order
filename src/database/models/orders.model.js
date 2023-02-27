@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint-disable no-shadow */
 const Orders = (sequelize, DataTypes) => {
   const Orders = sequelize.define('Orders', {
     clientId: DataTypes.STRING,
@@ -9,13 +8,13 @@ const Orders = (sequelize, DataTypes) => {
     cep: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    productList: DataTypes.JSON
+    productList: DataTypes.JSON,
   }, {
     underscored: true,
     tableName: 'orders',
   });
 
-  return Orders
-}
+  return Orders;
+};
 
 module.exports = Orders;
