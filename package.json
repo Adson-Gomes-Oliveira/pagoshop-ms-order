@@ -7,7 +7,9 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "test": "jest",
-    "test-file": "jest $(find __tests__ -name \"$1\")"
+    "test:watch": "jest --watch",
+    "test:file": "jest $(find __tests__ -name \"$1\")",
+    "test:coverage": "jest --watch --coverage"
   },
   "keywords": [],
   "author": "",
