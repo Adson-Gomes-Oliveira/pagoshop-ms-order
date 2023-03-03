@@ -6,8 +6,8 @@ const validate = require('../validations/orders.validation');
 const create = async (req, res) => {
   const payload = req.body;
   validate.payload(payload);
-
   payload.status = 'DONE';
+
   const response = await Orders.create(payload);
   return res.status(HTTPStatus.CREATED).json(response);
 };
@@ -33,6 +33,8 @@ const confirmOrder = async (req, res) => {
 
   const payment = await axios.post('http://finance-container:3004/api/payments/', payload)
     .then((result) => result.data);
+
+  console.log(payment);
 
   const order = await Orders.findByPk(id);
 

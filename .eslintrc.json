@@ -1,8 +1,9 @@
 {
     "env": {
-        "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "node": true,
+        "jest": true
     },
     "extends": "airbnb-base",
     "overrides": [
@@ -11,6 +12,8 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "no-console": "off"
+        "linebreak-style": "off",
+        "no-console": "off",
+        "no-underscore-dangle": "off"
     }
 }

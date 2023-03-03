@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:file": "jest $(find __tests__ -name \"$1\")",
-    "test:coverage": "jest --watch --coverage"
+    "prestart": "npx sequelize-cli db:create --env test && npx sequelize-cli db:migrate --env test",
+    "preend": "npx sequelize-cli db:drop --env test",
+    "test": "npm run prestart && jest --forceExit && npm run preend",
+    "test:file": "jest $(find __tests__ -name \"$1\")r",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -28,10 +29,14 @@
     "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
+    "dockest": "^3.0.1",
     "eslint": "^8.35.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "jest": "^29.4.3",
     "nodemon": "^2.0.20",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "supertest": "^6.3.3",
+    "testcontainers": "^9.1.3"
   }
 }
