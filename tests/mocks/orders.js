@@ -18,7 +18,7 @@ const ORDER_MOCK_INSTANCE = {
 };
 
 const ORDER_MOCK_PAYLOAD = {
-  clientId: '64009e3df61ff28f5a74b74f',
+  clientId: '6403e8f3bbc977bd9e744a6a',
   street: 'Rua C',
   number: '155',
   moreInfo: 'no_info',
