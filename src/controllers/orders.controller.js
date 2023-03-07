@@ -2,6 +2,7 @@ const axios = require('axios');
 const { Orders } = require('../database/models');
 const HTTPStatus = require('../helpers/HTTP.status');
 const validate = require('../validations/orders.validation');
+require('dotenv');
 
 const create = async (req, res) => {
   const payload = req.body;
@@ -16,18 +17,18 @@ const confirmOrder = async (req, res) => {
   const { id } = req.params;
   const payload = req.body;
 
-  const payment = await axios.post('http://finance-container:3004/api/payments/', payload)
+  const payment = await axios.post(`http://${process.env.PAYMENT_HOST || '127.0.0.1'}:3004/api/payments/`, payload)
     .then((result) => result.data);
 
   const order = await Orders.findByPk(id);
 
-  const client = await axios.get(`http://account-container:3002/api/accounts/${order.clientId}`)
+  const client = await axios.get(`http://${process.env.ACCOUNT_HOST || '127.0.0.1'}:3002/api/accounts/${order.clientId}`)
     .then((result) => result.data);
 
-  const productListFormated = await axios.post('http://product-container:3001/api/products/order/', order.productList)
+  const productListFormated = await axios.post(`http://${process.env.PRODUCT_HOST || '127.0.0.1'}:3001/api/products/order/`, order.productList)
     .then((result) => result.data);
 
-  const invoice = await axios.post(`http://finance-container:3004/api/payments/confirm/${payment.id}`, {
+  const invoice = await axios.post(`http://${process.env.PAYMENT_HOST || '127.0.0.1'}:3004/api/payments/confirm/${payment.id}`, {
     name: client.name,
     cpf: client.cpf,
     paymentId: payment.id,
