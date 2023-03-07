@@ -9,6 +9,7 @@ const Orders = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     productList: DataTypes.JSON,
+    status: DataTypes.STRING,
   }, {
     underscored: true,
     tableName: 'orders',

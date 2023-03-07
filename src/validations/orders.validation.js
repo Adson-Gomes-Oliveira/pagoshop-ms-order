@@ -18,6 +18,7 @@ const payload = (payloadOrder) => {
       discount: JOI.number().required(),
       actualUnitPrice: JOI.number().required(),
     })).required(),
+    status: JOI.string().required(),
   }).validate(payloadOrder);
 
   if (error) throw customError(error.message, HTTPStatus.UN_ENTITY);

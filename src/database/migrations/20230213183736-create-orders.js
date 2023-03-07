@@ -36,6 +36,9 @@ module.exports = {
         type: Sequelize.JSON,
         field: 'product_list',
       },
+      status: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
