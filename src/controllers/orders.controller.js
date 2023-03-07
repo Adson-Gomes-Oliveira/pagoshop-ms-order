@@ -12,21 +12,6 @@ const create = async (req, res) => {
   return res.status(HTTPStatus.CREATED).json(response);
 };
 
-const formatProductList = async (productOrder) => {
-  const productDB = await axios.get(`http://localhost:3001/api/products/${productOrder.productId}`)
-    .then((result) => result.data);
-
-  return {
-    product: productDB.product,
-    quantity: productOrder.quantity,
-    price: productOrder.actualUnitPrice - productOrder.discount,
-  };
-};
-
-/* O(n²) -> O(n) => Utilizar api unica com lista de ids
-como payload que retorna lista pronta de produtos.
-*/
-
 const confirmOrder = async (req, res) => {
   const { id } = req.params;
   const payload = req.body;
@@ -39,7 +24,8 @@ const confirmOrder = async (req, res) => {
   const client = await axios.get(`http://localhost:3002/api/accounts/${order.clientId}`)
     .then((result) => result.data);
 
-  const productListFormated = await Promise.all(order.productList.map(formatProductList));
+  const productIdList = order.productList.map((product) => product.productId);
+  const productListFormated = await axios.get(`http://localhost:3001/api/products/order/${productIdList}`);
 
   console.log(productListFormated);
 
