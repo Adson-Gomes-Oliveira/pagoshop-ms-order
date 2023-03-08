@@ -5,7 +5,7 @@ const HTTPStatus = require('../../src/helpers/HTTP.status');
 const {
   ORDER_MOCK_PAYLOAD,
   // PAYMENT_MOCK_PAYLOAD,
-} = require('../mocks/orders');
+} = require('../mocks/orders.mock');
 
 describe('Testing orders CRUD', () => {
   it('POST: A new order should be created', async () => {

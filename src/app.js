@@ -3,8 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
-const orderRoutes = require('./routes/orders.route');
-const swaggerDocument = require('../swagger/orders-swagger.json');
+const orderRoutes = require('./routes/orders.routes');
+const swaggerDocument = require('../orders-swagger.json');
 const errorMiddleware = require('./middlewares/error.middleware');
 
 const app = express();
