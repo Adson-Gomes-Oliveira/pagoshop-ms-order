@@ -1,4 +1,5 @@
 require('express-async-errors');
+require('./middlewares/auth.middleware');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
