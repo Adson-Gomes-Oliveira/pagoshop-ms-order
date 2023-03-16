@@ -4,6 +4,13 @@ const HTTPStatus = require('../helpers/HTTP.status');
 const validate = require('../validations/orders.validation');
 require('dotenv');
 
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const response = await Orders.findByPk(id);
+
+  return res.status(HTTPStatus.OK).json(response);
+};
+
 const create = async (req, res) => {
   const payload = req.body;
   payload.status = 'DONE';
@@ -44,6 +51,7 @@ const confirmOrder = async (req, res) => {
 };
 
 module.exports = {
+  getById,
   create,
   confirmOrder,
 };
