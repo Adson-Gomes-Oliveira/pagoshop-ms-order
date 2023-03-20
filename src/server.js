@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 require('dotenv/config');
 const app = require('./app');
 
 const PORT = process.env.PORT || 3003;
 
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
