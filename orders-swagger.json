@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Ecommerce Users - OpenAPI 3.0",
-    "description": "API do Ecommerce desenvolvido durante o curso da Alura.",
+    "title": "Ecommerce PagoShop - Orders",
+    "description": "API do Ecommerce PagoShop, veja a documentação em [Ecommerce Repo Docs](https://github.com/Adson-Gomes-Oliveira/Ecommerce).",
     "contact": {
       "email": "adsongoliveira2022@outlook.com",
       "name": "Desenvolvedor"
@@ -11,11 +11,11 @@
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
     },
-    "version": "0.0.1"
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3001"
+      "url": "http://localhost:3003"
     }
   ],
   "tags": [
@@ -85,6 +85,52 @@
           "400": {
             "$ref": "#/components/responses/BadRequest"
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/api/orders/confirm/{id}": {
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Confirma um pedido",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -98,22 +144,22 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "client_id": {
             "type": "string"
           },
-          "street_address": {
+          "street": {
             "type": "string"
           },
-          "number_address": {
-            "type": "integer"
+          "number": {
+            "type": "string"
           },
-          "more_info_address": {
+          "more_info": {
             "type": "string"
           },
           "cep": {
-            "type": "integer"
+            "type": "string"
           },
           "city": {
             "type": "string"
@@ -121,38 +167,28 @@
           "state": {
             "type": "string"
           },
-          "product_list": {
+          "productList": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "productId": {
                   "type": "string"
                 },
-                "name": {
+                "productName": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "unit_price": {
-                  "type": "number"
-                },
-                "stock_quantity": {
+                "quantity": {
                   "type": "integer"
                 },
-                "category_id": {
-                  "type": "string"
+                "discount": {
+                  "type": "integer"
+                },
+                "actualUnitPrice": {
+                  "type": "integer"
                 }
               }
             }
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -162,17 +198,17 @@
           "client_id": {
             "type": "string"
           },
-          "street_address": {
+          "street": {
             "type": "string"
           },
-          "number_address": {
-            "type": "integer"
+          "number": {
+            "type": "string"
           },
-          "more_info_address": {
+          "more_info": {
             "type": "string"
           },
           "cep": {
-            "type": "integer"
+            "type": "string"
           },
           "city": {
             "type": "string"
@@ -180,34 +216,113 @@
           "state": {
             "type": "string"
           },
-          "product_list": {
+          "productList": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "productId": {
                   "type": "string"
                 },
-                "name": {
+                "productName": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "unit_price": {
-                  "type": "number"
-                },
-                "stock_quantity": {
+                "quantity": {
                   "type": "integer"
                 },
-                "category_id": {
-                  "type": "string"
+                "discount": {
+                  "type": "integer"
+                },
+                "actualUnitPrice": {
+                  "type": "integer"
                 }
               }
             }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Invoice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "paymentId": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "object",
+            "properties": {
+              "buyerAddress": {
+                "type": "object",
+                "properties": {
+                  "street": {
+                    "type": "string"
+                  },
+                  "number": {
+                    "type": "string"
+                  },
+                  "cep": {
+                    "type": "string"
+                  },
+                  "more_info": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                }
+              },
+              "productsOrdered": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "type": "integer"
+                    },
+                    "price": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "buyerName": {
+            "type": "string"
+          },
+          "cardNumber": {
+            "type": "string"
+          },
+          "cvv": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string"
           }
         }
       }
@@ -227,7 +342,7 @@
       "IdParam": {
         "name": "id",
         "in": "path",
-        "description": "ID da categoria",
+        "description": "ID do pedido",
         "required": true,
         "schema": {
           "type": "integer"
