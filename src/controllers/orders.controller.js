@@ -48,7 +48,7 @@ const confirmOrder = async (req, res) => {
     paymentId: payment.id,
     description: {
       buyerAddress: client.address,
-      ordersList: productListFormated,
+      productsOrdered: productListFormated,
     },
   }, {
     headers: { Authorization: token },

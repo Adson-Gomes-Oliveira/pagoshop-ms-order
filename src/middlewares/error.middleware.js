@@ -2,7 +2,7 @@
 const HTTPStatus = require('../helpers/HTTP.status');
 
 const errorMiddleware = (err, _req, res, _next) => {
-  if (!err.status) return res.status(HTTPStatus.INTERNAL).send(err.message);
+  if (!err.status) return res.status(HTTPStatus.INTERNAL).send(err);
   return res.status(err.status).send(err.message);
 };
 
