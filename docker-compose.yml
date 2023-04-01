@@ -8,7 +8,7 @@ services:
     volumes:
       - ./:/app/ms-order
     environment:
-      - PORT=3001
+      - PORT=3003
       - DB_HOST=mongodb-ms-order
       - DB_USER=root
       - DB_PASSWORD=secret
