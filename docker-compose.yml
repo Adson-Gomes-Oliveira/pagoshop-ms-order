@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  trooper-ms-order:
+    container_name: ms-order
+    build: ./
+    ports:
+      - 3001:3001
+    volumes:
+      - ./:/app/ms-order
+    environment:
+      - PORT=3001
+      - DB_HOST=mongodb-ms-order
+      - DB_USER=root
+      - DB_PASSWORD=secret
+      - DB_NAME=ms-order
+      - JWT_SECRET=MTk4OGExOTZkMWYyOWZjZjlmOTcwMWVjZWRjMzc1MzZkOGM0MmFjMjQ0NjcyZjIzZDQwOGU4YTQ1YWQ3NTRjZA==
+    depends_on:
+      - mongodb-ms-order
+
+  mongodb-ms-order:
+    image: mongo:5
+    ports:
+      - 27021:27017
+    volumes:
+      - mongodb-order-volume-docker:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+
+  mongodb-ms-order-test:
+    image: mongo:5
+    ports:
+      - 27022:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+
+volumes:
+  mongodb-order-volume-docker:
