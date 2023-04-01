@@ -4,7 +4,7 @@ services:
     container_name: ms-order
     build: ./
     ports:
-      - 3001:3001
+      - 3003:3003
     volumes:
       - ./:/app/ms-order
     environment:
