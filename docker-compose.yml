@@ -13,6 +13,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=secret
       - DB_NAME=ms-order
+      - DB_PORT=3306
       - JWT_SECRET=MTk4OGExOTZkMWYyOWZjZjlmOTcwMWVjZWRjMzc1MzZkOGM0MmFjMjQ0NjcyZjIzZDQwOGU4YTQ1YWQ3NTRjZA==
     depends_on:
       - mysql-ms-order

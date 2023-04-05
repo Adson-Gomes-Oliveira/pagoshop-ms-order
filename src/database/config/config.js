@@ -2,15 +2,15 @@ module.exports = {
   development: {
     username: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'secret',
-    database: process.env.DB_DATABASE || 'order',
+    database: process.env.DB_DATABASE || 'ms-order',
     host: process.env.DB_HOST || 'localhost',
-    port: '3306',
+    port: process.env.DB_PORT || '3306',
     dialect: process.env.DB_DIALECT || 'mysql',
   },
   test: {
     username: 'root',
     password: 'secret',
-    database: 'order-test',
+    database: 'ms-order-test',
     host: '127.0.0.1',
     port: '3307',
     dialect: 'mysql',
