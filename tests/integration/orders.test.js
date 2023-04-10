@@ -18,18 +18,4 @@ describe('Testing orders CRUD', () => {
     expect(response.body).toHaveProperty('productList');
     expect(response.body.productList).toBeInstanceOf(Array);
   });
-
-  // it('POST: A order should be confirmed', async () => {
-  //   const responseCreate = await request(app)
-  //     .post('/api/orders')
-  //     .send(ORDER_MOCK_PAYLOAD);
-
-  //   const responseConfirm = await request(app)
-  //     .post(`/api/orders/confirm/${responseCreate.body.id}`)
-  //     .send(PAYMENT_MOCK_PAYLOAD);
-
-  //   expect(responseConfirm.body).toHaveProperty('id');
-  //   expect(responseConfirm.body).toHaveProperty('description');
-  //   expect(responseConfirm.body).toHaveProperty('paymentId');
-  // });
 });
