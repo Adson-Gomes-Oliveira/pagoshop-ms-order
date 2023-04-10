@@ -13,7 +13,7 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   const payload = req.body;
-  payload.status = 'DONE';
+  payload.status = 'CREATED';
   validate.payload(payload);
 
   const response = await Orders.create(payload);
