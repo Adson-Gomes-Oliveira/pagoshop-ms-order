@@ -1,7 +1,7 @@
 const OrdersServices = require('../services/orders.service');
 const HTTPStatus = require('../helpers/HTTP.status');
 
-const getById = async (req, res) => {
+const findById = async (req, res) => {
   const { id } = req.params;
   const response = await OrdersServices.findById(id);
 
@@ -16,6 +16,6 @@ const create = async (req, res) => {
 };
 
 module.exports = {
-  getById,
+  findById,
   create,
 };

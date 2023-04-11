@@ -10,6 +10,7 @@ const ORDER_MOCK_INSTANCE = {
   productList: [
     {
       productId: '64009e3df61ff28f5a74se54',
+      productName: 'Samsung S20 FE',
       quantity: 5,
       discount: 122.50,
       actualUnitPrice: 655.98,
@@ -28,6 +29,7 @@ const ORDER_MOCK_PAYLOAD = {
   productList: [
     {
       productId: '64009e3df61ff28f5a74se54',
+      productName: 'Samsung S20 FE',
       quantity: 5,
       discount: 122.50,
       actualUnitPrice: 655.98,

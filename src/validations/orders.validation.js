@@ -22,7 +22,7 @@ const payload = (payloadOrder) => {
     status: JOI.string().required(),
   }).validate(payloadOrder);
 
-  if (error) throw customError(error.message, HTTPStatus.UN_ENTITY);
+  if (error) throw customError(error.message.replace(/\\|"/g, ''), HTTPStatus.UN_ENTITY);
 };
 
 module.exports = {

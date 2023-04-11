@@ -7,7 +7,7 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "pre-start": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "pre-start-test": "npx sequelize-cli db:create --env test && npx sequelize-cli db:migrate --env test",
+    "pre-start-test": "npx sequelize-cli db:create --env test && npx sequelize-cli db:migrate --env test && npx sequelize-cli db:seed:all --env test",
     "pre-end-test": "npx sequelize-cli db:drop --env test",
     "test": "npm run pre-start-test && jest --detectOpenHandles && npm run pre-end-test",
     "test:file": "jest $(find __tests__ -name \"$1\")",
