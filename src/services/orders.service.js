@@ -14,12 +14,15 @@ const findById = async (id) => {
 };
 
 const create = async (payload) => {
-  const newPayload = { ...payload, status: 'CREATED' };
+  const newPayload = { ...payload, status: 'CREATED', cep: payload.cep.replace('-', '') };
   validate.payload(newPayload);
 
-  const response = await Orders.create(newPayload);
-
-  return response;
+  try {
+    const response = await Orders.create(newPayload);
+    return response;
+  } catch (error) {
+    throw CustomError(error.message, HTTPStatus.INTERNAL);
+  }
 };
 
 module.exports = {
