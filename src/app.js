@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 
-app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
+app.get('/health-check', (_req, res) => res.status(200).send('OK!'));
 app.use('/api/orders', orderRoutes);
 app.use(errorMiddleware);
 
