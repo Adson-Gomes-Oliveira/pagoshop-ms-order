@@ -1,6 +1,7 @@
 require('express-async-errors');
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
 const orderRoutes = require('./routes/orders.routes');
 const swaggerDocument = require('../orders-swagger.json');
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use(helmet());
+app.use(cors());
 
 app.get('/health-check', (_req, res) => res.status(200).send('OK!'));
 app.use('/api/orders', orderRoutes);
